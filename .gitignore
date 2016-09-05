@@ -1,0 +1,20 @@
+# Ignore tmp files
+tmp/*
+*.swn
+*.swp
+*.swo
+.sw*
+
+# Ignore log files
+log/*
+!/log/.keep
+
+# Ignore auto-generated database files
+*db/schema.rb
+*db/*.sqlite3
+*db/*.sqlite3-journal
+*schema.rb
+
+# Ignore other auto-generated Ruby and RoR files
+Gemfile.lock
+*.bundle
