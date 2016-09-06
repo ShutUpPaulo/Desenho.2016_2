@@ -3,8 +3,5 @@ Inherit_from: ../.rubocop.yml
 Style/Encoding:
   Enabled: false
 
-Metrics/LineLength:
-  Max: 80
-
 Style/IndentationConsistency:
   EnforcedStyle: rails
