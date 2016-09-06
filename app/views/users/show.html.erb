@@ -1,3 +1,6 @@
-<h1>Hello User <%= current_user.id %></h1>
+<h1>Hello <%= link_to current_user.username, edit_user_registration_path %></h1>
 <p>Find me in app/views/users/show.html.erb</p>
-<%= link_to "sign out", destroy_user_session_path, :method => 'delete' %>
+<p>Name: <%= current_user.firstname %> <%= current_user.lastname %></p>
+<p>Email: <%= current_user.email %></p>
+
+<%= link_to 'sign out', destroy_user_session_path, :method => 'delete' %>

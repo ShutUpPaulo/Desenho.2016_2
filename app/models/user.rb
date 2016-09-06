@@ -6,13 +6,7 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable
 
   # Custom validations
-  # validate(:validate_username)
-
-  # private
-  #   # Fix the conflict between username and email
-  #   def validate_username
-  #     if User.where(email: username).exists?
-  #       errors.add(:username, :invalid)
-  #     end
-  #   end
+  validates :firstname, presence: true
+  validates :lastname,  presence: true
+  validates :username,  presence: true
 end
