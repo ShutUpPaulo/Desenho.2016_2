@@ -1,5 +1,21 @@
 Rails.application.routes.draw do
+  root 'home#index'
+
   devise_for :users
+  resources :users, :only => :show
+  # Common Devise customizations
+  # after_sign_in_path_for ''
+  # after_sign_out_path_for ''
+  # devise_for :users, path: "auth", path_names: {
+  #   sign_in: 'login',
+  #   sign_out: 'logout',
+  #   password: 'secret',
+  #   confirmation: 'verification',
+  #   unlock: 'unblock',
+  #   registration: 'register',
+  #   sign_up: 'cmon_let_me_in'
+  # }
+
   # The priority is based upon order of creation: first created -> highest
   # priority.
   # See how all your routes lay out with "rake routes".
