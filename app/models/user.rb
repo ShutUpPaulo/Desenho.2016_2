@@ -1,3 +1,4 @@
+# User model
 class User < ActiveRecord::Base
   # Others available are:
   # :confirmable, :lockable, :timeoutable, :recoverable, :omniauthable

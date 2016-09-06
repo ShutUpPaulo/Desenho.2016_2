@@ -1,7 +1,19 @@
-Inherit_from: ../.rubocop.yml
-
 Style/Encoding:
   Enabled: false
 
 Style/IndentationConsistency:
   EnforcedStyle: rails
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 15
+
+AllCops:
+  Exclude:
+    - 'db/development.sqlite3'
+    - 'db/schema.rb'
+    - 'bin/spring'
+    - 'config/application.rb'

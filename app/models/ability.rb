@@ -1,3 +1,4 @@
+# Ability model for CanCan
 class Ability
   include CanCan::Ability
 

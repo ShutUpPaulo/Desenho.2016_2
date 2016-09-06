@@ -31,13 +31,13 @@ module Code
 
     # Add easycook gmail account
     ActionMailer::Base.smtp_settings = {
-      :address => 'smtp.gmail.com',
-      :domain => 'mail.google.com',
-      :port => 587,
-      :user_name => 'easycookmail@gmail.com',
-      :password => 'koocysae',
-      :authentication => 'login',
-      :enable_starttls_auto => true
+      address: 'smtp.gmail.com',
+      domain: 'mail.google.com',
+      port: 587,
+      user_name: 'easycookmail@gmail.com',
+      password: 'koocysae',
+      authentication: 'login',
+      enable_starttls_auto: true
     }
   end
 end
