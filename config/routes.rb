@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'home#index'
 
+  resources :ingredients
+  resources :users, only: :show
   devise_for :users, controllers: {
     # confirmations:      'users/confirmations',
     # omniauth_callbacks: 'users/omniauth_callbacks',
@@ -9,7 +11,6 @@ Rails.application.routes.draw do
     sessions:           'users/sessions',
     # unlocks:            'users/unlocks'
   }
-  resources :users, only: :show
   # Common Devise customizations
   # after_sign_in_path_for ''
   # after_sign_out_path_for ''
