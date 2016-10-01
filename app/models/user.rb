@@ -9,4 +9,20 @@ class User < ActiveRecord::Base
   validates :firstname, presence: true
   validates :lastname,  presence: true
   validates :username,  presence: true
+
+  # Define roles
+  belongs_to :role
+  before_create :set_default_role
+  def role? role
+    if self.role.nil?
+      return false
+    end
+    self.role.name == role
+  end
+
+  private
+
+  def set_default_role
+    self.role ||= Role.find_by_name('cook')
+  end
 end
