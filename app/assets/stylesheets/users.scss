@@ -1,3 +1,51 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.btn-custom {
+  background: #0f4700;
+  border-color: #0f4700;
+  color: #f0f66e;
+  font-size: 18px;
+  border-radius: 3px;
+  border-width: 5px;
+  margin: 10px;
+  padding: 10px;
+}
+.btn-custom:hover {
+  background: #0b540e;
+  border-color: #0b540e;
+  color: #f3b700;
+}
+.btn-custom:active, .btn-custom:focus {
+  background: #0b540e;
+  border-color: #0b540e;
+  color: #f3b700;
+}
+
+.title{
+  color:#757575;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 25px;
+}
+
+.center{
+  text-align: center;
+}
+
+.resize{
+  margin: 20px;
+  -ms-transform: scale(3, 5); /* IE 9 */
+  -webkit-transform: scale(3, 5); /* Safari */
+  transform: scale(3, 5);
+  color: #ff3614;
+}
+
+.field{
+  margin: 10px;
+  text-align: left;
+}
+.label{
+  margin: 10px;
+  text-align: left;
+}
