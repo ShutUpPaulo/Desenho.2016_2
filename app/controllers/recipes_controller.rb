@@ -1,4 +1,8 @@
 class RecipesController < ApplicationController
+  # Authentication and Authorization hacks
+  # before_action :authenticate_user!
+  load_and_authorize_resource
+
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
   # GET /recipes
@@ -30,6 +34,7 @@ class RecipesController < ApplicationController
       if @recipe.save
         format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
         format.json { render :show, status: :created, location: @recipe }
+        current_user.recipes << @recipe
       else
         format.html { render :new }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }

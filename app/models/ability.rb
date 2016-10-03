@@ -7,7 +7,8 @@ class Ability
     if user.role? 'admin'
       can :manage, :all
     elsif user.role? 'cook'
-      can [:read, :create], Ingredient
+      can [:read, :create], [Ingredient, Recipe]
+      can [:update, :destroy], Recipe, user_id: user.id
     else # guest user (not logged in)
       can :read, :all
     end

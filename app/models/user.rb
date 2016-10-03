@@ -20,6 +20,9 @@ class User < ActiveRecord::Base
     self.role.name == role
   end
 
+  # Associate users and recipes
+  has_many :recipes
+
   private
 
   def set_default_role
