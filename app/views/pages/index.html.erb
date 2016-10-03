@@ -14,5 +14,12 @@
                 </li>
             </ul>
         </div>
+        <div>
+            <%- if user_signed_in? %>
+                <%= render 'navbar_signed_in' %>
+            <% else %>
+                <%= render 'navbar_form' %>
+            <% end -%>
+       </div>
     </div>
 </div>
