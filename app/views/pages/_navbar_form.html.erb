@@ -1,10 +1,17 @@
 <%= form_for(@user, url: session_path(@user)) do |f| %>
+<div class="row singin">
   <form class="form-signin">
-  <%= f.email_field :email, :class=>"form-control", autofocus: true, placeholder: "Email" %>
-  <!-- <input type="text" class="form-control" placeholder="Email" required autofocus> -->
-  <%= f.password_field :password, :class=>"form-control", placeholder: "Password", autocomplete: "off" %>
-  <!-- <input type="password" class="form-control" placeholder="Password" required> -->
-  <div class="actions">
-    <%= f.submit "Log in", :class => "btn btn-lg btn-primary btn-block" %>
-  </div>
+    <div class="col-sm-4">
+      <%= f.email_field :email, :class=>"form-control", autofocus: true, placeholder: "Email" %>
+    </div>
+      <!-- <input type="text" class="form-control" placeholder="Email" required autofocus> -->
+    <div class="col-sm-4">
+      <%= f.password_field :password, :class=>"form-control", placeholder: "Password", autocomplete: "off" %>
+      <!-- <input type="password" class="form-control" placeholder="Password" required> -->
+    </div>
+    <div class="col-sm-4"
+      <div class="actions">
+        <%= f.submit "Log in", :class => "btn btn-lg btn-primary btn-block" %>
+      </div>
+    </div>
 <% end %>
