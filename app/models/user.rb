@@ -6,17 +6,15 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable
 
   # Custom validations
-  validates :firstname, presence: true
-  validates :lastname,  presence: true
-  validates :username,  presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :username, presence: true
 
   # Define roles
   belongs_to :role
   before_create :set_default_role
-  def role? role
-    if self.role.nil?
-      return false
-    end
+  def role?(role)
+    return false if self.role.nil?
     self.role.name == role
   end
 
