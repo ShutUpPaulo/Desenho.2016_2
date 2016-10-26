@@ -49,6 +49,9 @@ group :development, :test do
 
   # Call 'rubocop' at the root directory to analyze the code quality
   gem 'rubocop'
+
+  # Use Rspec as the main unit tests tool
+  gem 'rspec-rails', '~> 3.5'
 end
 
 group :development do
