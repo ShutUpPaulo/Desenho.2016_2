@@ -1,3 +1,4 @@
+# Recipes Controller
 class RecipesController < ApplicationController
   # Authentication and Authorization hacks
   # before_action :authenticate_user!
@@ -29,15 +30,20 @@ class RecipesController < ApplicationController
   # POST /recipes.json
   def create
     @recipe = Recipe.new(recipe_params)
-
     respond_to do |format|
       if @recipe.save
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
+        format.html do
+          redirect_to @recipe,
+                      notice: 'Recipe was successfully created.'
+        end
         format.json { render :show, status: :created, location: @recipe }
         current_user.recipes << @recipe
       else
         format.html { render :new }
-        format.json { render json: @recipe.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @recipe.errors,
+                 status: :unprocessable_entity
+        end
       end
     end
   end
@@ -47,11 +53,17 @@ class RecipesController < ApplicationController
   def update
     respond_to do |format|
       if @recipe.update(recipe_params)
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
+        format.html do
+          redirect_to @recipe,
+                      notice: 'Recipe was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @recipe }
       else
         format.html { render :edit }
-        format.json { render json: @recipe.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @recipe.errors,
+                 status: :unprocessable_entity
+        end
       end
     end
   end
@@ -61,19 +73,25 @@ class RecipesController < ApplicationController
   def destroy
     @recipe.destroy
     respond_to do |format|
-      format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
+      format.html do
+        redirect_to recipes_url,
+                    notice: 'Recipe was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_recipe
-      @recipe = Recipe.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def recipe_params
-      params.require(:recipe).permit(:recipeName, :recipeDescriptions, :recipeInstructions)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
+  end
+
+  # Never trust params from the scary net, only allow the white list through.
+  def recipe_params
+    params.require(:recipe).permit(:name,
+                                   :descriptions,
+                                   :instructions)
+  end
 end

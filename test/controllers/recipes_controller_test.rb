@@ -5,41 +5,49 @@ class RecipesControllerTest < ActionController::TestCase
     @recipe = recipes(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get :index
     assert_response :success
     assert_not_nil assigns(:recipes)
   end
 
-  test "should get new" do
+  test 'should get new' do
     get :new
     assert_response :success
   end
 
-  test "should create recipe" do
+  test 'should create recipe' do
     assert_difference('Recipe.count') do
-      post :create, recipe: { recipeDescriptions: @recipe.recipeDescriptions, recipeInstructions: @recipe.recipeInstructions, recipeName: @recipe.recipeName }
+      post :create, recipe: {
+        descriptions: @recipe.descriptions,
+        instructions: @recipe.instructions,
+        name: @recipe.name
+      }
     end
 
     assert_redirected_to recipe_path(assigns(:recipe))
   end
 
-  test "should show recipe" do
+  test 'should show recipe' do
     get :show, id: @recipe
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get :edit, id: @recipe
     assert_response :success
   end
 
-  test "should update recipe" do
-    patch :update, id: @recipe, recipe: { recipeDescriptions: @recipe.recipeDescriptions, recipeInstructions: @recipe.recipeInstructions, recipeName: @recipe.recipeName }
+  test 'should update recipe' do
+    patch :update, id: @recipe, recipe: {
+      descriptions: @recipe.descriptions,
+      instructions: @recipe.instructions,
+      name: @recipe.name
+    }
     assert_redirected_to recipe_path(assigns(:recipe))
   end
 
-  test "should destroy recipe" do
+  test 'should destroy recipe' do
     assert_difference('Recipe.count', -1) do
       delete :destroy, id: @recipe
     end
