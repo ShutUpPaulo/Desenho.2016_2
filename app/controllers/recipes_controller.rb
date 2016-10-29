@@ -30,6 +30,10 @@ class RecipesController < ApplicationController
   # POST /recipes.json
   def create
     @recipe = Recipe.new(recipe_params)
+
+    # FIXME: linking ingredients to recipes the wrong way
+    @recipe.ingredients << Ingredient.first unless Ingredient.all.empty?
+
     respond_to do |format|
       if @recipe.save
         format.html do
@@ -91,7 +95,7 @@ class RecipesController < ApplicationController
   # Never trust params from the scary net, only allow the white list through.
   def recipe_params
     params.require(:recipe).permit(:name,
-                                   :descriptions,
+                                   :description,
                                    :instructions)
   end
 end
