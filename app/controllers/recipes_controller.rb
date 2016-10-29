@@ -30,6 +30,10 @@ class RecipesController < ApplicationController
   # POST /recipes.json
   def create
     @recipe = Recipe.new(recipe_params)
+
+    # FIXME: linking ingredients to recipes the wrong way
+    @recipe.ingredients << Ingredient.first unless Ingredient.all.empty?
+
     respond_to do |format|
       if @recipe.save
         format.html do
