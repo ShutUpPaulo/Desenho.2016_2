@@ -23,11 +23,11 @@ RSpec.describe RecipesController, type: :controller do
   # Recipe. As you add validations to Recipe, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    { name: 'MyString', descriptions: 'MyText', instructions: 'MyString' }
+    { name: 'MyString', description: 'MyText', instructions: 'MyString' }
   end
 
   let(:invalid_attributes) do
-    { name: '', descriptions: '', instructions: '' }
+    { name: '', description: '', instructions: '' }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -112,7 +112,7 @@ RSpec.describe RecipesController, type: :controller do
   describe 'PUT #update' do
     context 'with valid params' do
       let(:new_attributes) do
-        { name: 'updated', descriptions: 'updated', instructions: 'updated' }
+        { name: 'updated', description: 'updated', instructions: 'updated' }
       end
 
       it 'updates the requested recipe' do
