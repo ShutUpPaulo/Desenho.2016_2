@@ -1,7 +1,7 @@
 json.extract! recipe,
               :id,
               :name,
-              :descriptions,
+              :description,
               :instructions,
               :created_at,
               :updated_at
