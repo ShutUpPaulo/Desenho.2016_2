@@ -9,7 +9,11 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /recipes.json
   def index
-    @recipes = Recipe.all
+    if params[:tag]
+      @recipes = Recipe.tagged_with(params[:tag])
+    else
+      @recipes = Recipe.all
+    end
   end
 
   # GET /recipes/1
