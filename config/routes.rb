@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'about' => 'pages#about'
 
   get 'tags/:tag', to: 'recipes#index', as: :tag
+  get 'tags', to: 'recipes#tags'
   resources :recipes
 
   devise_for :users, controllers: {

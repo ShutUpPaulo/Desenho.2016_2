@@ -16,6 +16,9 @@ class RecipesController < ApplicationController
     end
   end
 
+  def tags
+    @tags = Recipe.tag_counts
+  end
   # GET /recipes/1
   # GET /recipes/1.json
   def show
