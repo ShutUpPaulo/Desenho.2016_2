@@ -15,5 +15,10 @@
   <%= @recipe.instructions %>
 </p>
 
+<p>
+  <strong>Tags:</strong>
+  <%= @recipe.tag_list %>
+</p>
+
 <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
 <%= link_to 'Back', recipes_path %>
