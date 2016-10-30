@@ -15,3 +15,12 @@
  */
 
 @import 'materialize';
+
+.nav-wrapper {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.form-control.sign-in {
+  padding: auto 10px;
+}

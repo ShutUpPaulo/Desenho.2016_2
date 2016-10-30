@@ -1,0 +1,20 @@
+<div class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper">
+      <ul class="left hide-on-med-and-down">
+        <li><%= link_to 'EasyCook', root_path %></li>
+        <li><%= link_to 'Lista de Receitas', recipes_path %></li>
+        <li><%= link_to 'Sobre', about_path %></li>
+      </ul>
+      <ul class="right hide-on-med-and-down">
+        <%= form_for(:user, url: session_path(:user)) do |f| %>
+          <div class="form-control sign-in">
+            <li><%= f.email_field :email, class: "form-control", autofocus: true, placeholder: "Email" %></li>
+            <li><%= f.password_field :password, class: "form-control", placeholder: "Password", autocomplete: "off" %></li>
+            <li><%= f.submit "Log in", class: "waves-light btn" %></li>
+          </div>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+</div>
