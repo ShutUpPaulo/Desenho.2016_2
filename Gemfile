@@ -63,6 +63,6 @@ group :development do
   # background. Read more: https://github.com/rails/spring
   gem 'spring'
 
-  #Gem used to create tags on funcionalities
+  # Gem used to create tags on funcionalities
   gem 'acts-as-taggable-on', '~> 4.0'
 end

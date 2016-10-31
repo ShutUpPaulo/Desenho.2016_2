@@ -22,6 +22,7 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
+
   end
 
   # GET /recipes/new
@@ -40,7 +41,6 @@ class RecipesController < ApplicationController
 
     # FIXME: linking ingredients to recipes the wrong way
     @recipe.ingredients << Ingredient.first unless Ingredient.all.empty?
-
     respond_to do |format|
       if @recipe.save
         format.html do
