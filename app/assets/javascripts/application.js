@@ -11,7 +11,11 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
 //= require turbolinks
-//= require materialize-sprockets
+//= require jquery_ujs
 //= require_tree .
+//= require materialize.min
+
+$(document).ready(function(){
+  $('.modal').modal();
+});

@@ -12,9 +12,9 @@
  *
  *= require_tree .
  *= require_self
+ *= require material_icons
+ *= require materialize
  */
-
-@import 'materialize';
 
 .nav-wrapper {
   padding-left: 10px;
