@@ -37,17 +37,13 @@ class RecipesController < ApplicationController
     respond_to do |format|
       if @recipe.save
         format.html do
-          redirect_to @recipe,
-                      notice: 'Recipe was successfully created.'
+          redirect_to @recipe, notice: 'Recipe was successfully created.'
         end
         format.json { render :show, status: :created, location: @recipe }
         current_user.recipes << @recipe
       else
         format.html { render :new }
-        format.json do
-          render json: @recipe.errors,
-                 status: :unprocessable_entity
-        end
+        format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
     end
   end

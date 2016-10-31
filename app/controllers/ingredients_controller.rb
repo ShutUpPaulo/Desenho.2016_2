@@ -10,10 +10,8 @@ class IngredientsController < ApplicationController
   # GET /ingredients
   # GET /ingredients.json
   def index
-    @ingredients = Ingredient.all
-
-    @ingredients = Ingredient.search(params[:search]).order(sort_column + " " +
-    sort_direction).paginate(:per_page => 5, :page => params[:page])
+    @ingredients = Ingredient.search(params[:search]).order(sort_column + ' ' +
+    sort_direction).paginate(per_page: 5, page: params[:page])
   end
 
   # GET /ingredients/1
@@ -37,8 +35,7 @@ class IngredientsController < ApplicationController
     respond_to do |format|
       if @ingredient.save
         format.html do
-          redirect_to @ingredient,
-                      notice: 'Ingredient was successfully created.'
+          redirect_to @ingredient, notice: 'Ingredient was successfully created'
         end
         format.json { render :show, status: :created, location: @ingredient }
       else
@@ -97,10 +94,10 @@ class IngredientsController < ApplicationController
   end
 
   def sort_column
-    Ingredient.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    Ingredient.column_names.include?(params[:sort]) ? params[:sort] : 'name'
   end
 
   def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    %w(asc desc).include?(params[:direction]) ? params[:direction] : 'asc'
   end
 end
