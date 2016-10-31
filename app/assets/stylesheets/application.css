@@ -16,6 +16,12 @@
  *= require materialize
  */
 
+#header-logo {
+  height: 50px;
+  margin-bottom: 5px;
+  vertical-align: middle;
+}
+
 .nav-wrapper {
   padding-left: 10px;
   padding-right: 10px;

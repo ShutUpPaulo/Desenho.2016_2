@@ -3,6 +3,11 @@
     <div class='nav-wrapper'>
       <ul class='left hide-on-med-and-down'>
         <li>
+          <%= link_to root_path, method: :get do %>
+            <img class="responsive-img" id="header-logo" src="/logo.png">
+          <% end %>
+        </li>
+        <li>
           <%= link_to 'Receitas', recipes_path, method: :get %>
         </li>
         <li>
