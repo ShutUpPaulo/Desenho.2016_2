@@ -30,3 +30,15 @@
 .form-control.sign-in {
   padding: auto 10px;
 }
+
+.primary{
+  background-color: #ff8a80 !important;
+}
+
+.secondary{
+  background-color: #ffea00 !important;
+}
+
+.terciary{
+  background-color: #e0e0e0 !important;
+}
