@@ -22,6 +22,10 @@
   vertical-align: middle;
 }
 
+.modal {
+  width: 25% !important;
+}
+
 .nav-wrapper {
   padding-left: 10px;
   padding-right: 10px;
