@@ -18,4 +18,13 @@
 
 $(document).ready(function(){
   $('.modal').modal();
+
+  $(document).on("click", "#ingredients .pagination a", function() {
+  $.getScript(this.href);
+  return false;
+  });
+  $("#ingredients_search input").keyup(function() {
+    $.get($("#ingredients_search").attr("action"), $("#ingredients_search").serialize(), null, "script");
+    return false;
+  });
 });

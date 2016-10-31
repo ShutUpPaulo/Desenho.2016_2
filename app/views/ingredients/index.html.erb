@@ -1,29 +1,14 @@
-<p id="notice"><%= notice %></p>
 
 <h1>Listing Ingredients</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= form_tag ingredients_path, :method => 'get', :id => "ingredients_search" do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+  <div id="ingredients"><%= render 'ingredients' %></div>
+<% end %>
 
-  <tbody>
-    <% @ingredients.each do |ingredient| %>
-      <tr>
-        <td><%= ingredient.name %></td>
-        <td><%= ingredient.description %></td>
-        <td><%= link_to 'Show', ingredient %></td>
-        <td><%= link_to 'Edit', edit_ingredient_path(ingredient) %></td>
-        <td><%= link_to 'Destroy', ingredient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+<p id="notice"><%= notice %></p>
 
 <%= link_to 'New Ingredient', new_ingredient_path %>

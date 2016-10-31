@@ -1,0 +1,13 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+<table class="pretty">
+  <tr>
+    <th><%= sortable "name" %></th>
+  </tr>
+  <% for ingredient in @ingredients %>
+    <tr>
+      <td><%= ingredient.name %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @ingredients %>
