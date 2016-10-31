@@ -9,7 +9,15 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /recipes.json
   def index
-    @recipes = Recipe.all
+    @recipes = if params[:tag]
+                 Recipe.tagged_with(params[:tag])
+               else
+                 Recipe.all
+               end
+  end
+
+  def tags
+    @tags = Recipe.tag_counts
   end
 
   # GET /recipes/1
@@ -33,7 +41,6 @@ class RecipesController < ApplicationController
 
     # FIXME: linking ingredients to recipes the wrong way
     @recipe.ingredients << Ingredient.first unless Ingredient.all.empty?
-
     respond_to do |format|
       if @recipe.save
         format.html do
@@ -92,6 +99,7 @@ class RecipesController < ApplicationController
   def recipe_params
     params.require(:recipe).permit(:name,
                                    :description,
-                                   :instructions)
+                                   :instructions,
+                                   :tag_list)
   end
 end
