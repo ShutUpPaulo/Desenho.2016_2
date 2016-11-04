@@ -5,7 +5,9 @@ class Ability
   def initialize(user)
     user ||= User.new
 
+    alias_action :type, to: :read
     alias_action :tags, to: :read
+    alias_action :post_type, to: :create
 
     if user.role? 'admin'
       can :manage, :all

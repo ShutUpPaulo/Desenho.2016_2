@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get 'tags/:tag', to: 'recipes#index', as: :tag
   get 'tags', to: 'recipes#tags'
+  get 'recipes/type', to: 'recipes#type'
+  post 'recipes/type', to: 'recipes#post_type'
   resources :recipes
 
   devise_for :users, controllers: {

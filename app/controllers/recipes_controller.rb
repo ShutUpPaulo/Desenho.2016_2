@@ -25,9 +25,20 @@ class RecipesController < ApplicationController
   def show
   end
 
+  # GET /recipes/type
+  def type
+  end
+
+  # POST /recipes/type
+  def post_type
+    @@recipes_builder = nil
+    @@recipes_builder = choose_builder(params[:number])
+    redirect_to '/recipes/new'
+  end
+
   # GET /recipes/new
   def new
-    @recipe = Recipe.new
+    @recipes_builder = @@recipes_builder
   end
 
   # GET /recipes/1/edit
@@ -37,10 +48,13 @@ class RecipesController < ApplicationController
   # POST /recipes
   # POST /recipes.json
   def create
-    @recipe = Recipe.new(recipe_params)
+    recipes_builder = @@recipes_builder
+    recipes_builder.build_recipe(recipe_params)
+    @recipe = recipes_builder.recipe
 
     # FIXME: linking ingredients to recipes the wrong way
     @recipe.ingredients << Ingredient.first unless Ingredient.all.empty?
+
     respond_to do |format|
       if @recipe.save
         format.html do
@@ -101,5 +115,18 @@ class RecipesController < ApplicationController
                                    :description,
                                    :instructions,
                                    :tag_list)
+  end
+
+  # Choose Builder
+  def choose_builder(type)
+    if type == '1'
+      MainPlateBuilder.new
+    elsif type == '2'
+      AccompanimentBuilder.new
+    elsif type == '3'
+      DessertBuilder.new
+    else
+      DrinkBuilder.new
+    end
   end
 end
