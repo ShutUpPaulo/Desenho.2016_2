@@ -21,3 +21,5 @@ Gemfile.lock
 
 # Ignore the auto-generated file .DS_Store
 .DS_Store
+
+coverage

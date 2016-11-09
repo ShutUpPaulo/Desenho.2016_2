@@ -66,3 +66,7 @@ end
 
 # Gem used to create tags on funcionalities
 gem 'acts-as-taggable-on', '~> 4.0'
+
+# gem for test coverage
+gem 'simplecov', :require => false, :group => :test
+
