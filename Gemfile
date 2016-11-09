@@ -68,5 +68,9 @@ end
 gem 'acts-as-taggable-on', '~> 4.0'
 
 # gem for test coverage
-gem "codeclimate-test-reporter", group: :test, require: nil
+group :test do
+  gem "simplecov"
+  gem "codeclimate-test-reporter", "~> 1.0.0"
+end
+
 
