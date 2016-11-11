@@ -87,8 +87,10 @@ RSpec.describe IngredientsController, type: :controller do
 
   describe 'GET #edit' do
     it 'assigns the requested ingredient as @ingredient' do
+      # Only admin can edit
+      sign_in @admin
       ingredient = Ingredient.create! valid_attributes
-      get :edit, params: { id: ingredient.to_param }, session: valid_session
+      get :edit, id: ingredient.to_param, session: valid_session
       expect(assigns(:ingredient)).to eq(ingredient)
     end
   end
