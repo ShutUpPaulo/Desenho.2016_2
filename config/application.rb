@@ -39,5 +39,10 @@ module Code
       authentication: 'login',
       enable_starttls_auto: true
     }
+
+    # disable view spec generation, we will test them with cucumber
+    config.generators do |g|
+      g.view_specs false
+    end
   end
 end
