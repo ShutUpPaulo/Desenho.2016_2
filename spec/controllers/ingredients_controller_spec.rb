@@ -61,7 +61,7 @@ RSpec.describe IngredientsController, type: :controller do
   describe 'GET #show' do
     it 'assigns the requested ingredient as @ingredient' do
       ingredient = Ingredient.create! valid_attributes
-      get :show, params: { id: ingredient.to_param }, session: valid_session
+      get :show, id: ingredient.to_param , session: valid_session
       expect(assigns(:ingredient)).to eq(ingredient)
     end
   end
