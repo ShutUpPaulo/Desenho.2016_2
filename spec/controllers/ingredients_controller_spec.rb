@@ -35,6 +35,17 @@ RSpec.describe IngredientsController, type: :controller do
   # IngredientsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  before :all do
+    User.destroy_all
+    Role.destroy_all
+
+    @admin_role = Role.create! name: 'admin'
+    @cook_role = Role.create! name: 'cook'
+
+    @admin = create_sample_user 'admin', @admin_role
+    @cook = create_sample_user 'cook', @cook_role
+  end
+
   before :each do
     Ingredient.destroy_all
 
@@ -68,7 +79,8 @@ RSpec.describe IngredientsController, type: :controller do
 
   describe 'GET #new' do
     it 'assigns a new ingredient as @ingredient' do
-      get :new, params: {}, session: valid_session
+      sign_in @cook
+      get :new, session: valid_session
       expect(assigns(:ingredient)).to be_a_new(Ingredient)
     end
   end
@@ -193,4 +205,16 @@ RSpec.describe IngredientsController, type: :controller do
       expect(response).to redirect_to(ingredients_url)
     end
   end
+
+  private
+
+    def create_sample_user name, role
+      user = User.create! first_name: "test#{name}",
+                          last_name: "test#{name}",
+                          email: "#{name}@user.com",
+                          password: "test#{name}",
+                          username: "test#{name}",
+                          role: role
+      user
+    end
 end
