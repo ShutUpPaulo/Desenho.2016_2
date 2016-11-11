@@ -98,24 +98,30 @@ RSpec.describe IngredientsController, type: :controller do
   describe 'POST #create' do
     context 'with valid params' do
       it 'creates a new Ingredient' do
+        sign_in @cook
+
         expect do
           post :create,
-               params: { ingredient: valid_attributes },
+               ingredient: valid_attributes,
                session: valid_session
         end.to change(Ingredient, :count).by(1)
       end
 
       it 'assigns a newly created ingredient as @ingredient' do
+        sign_in @cook
+
         post :create,
-             params: { ingredient: valid_attributes },
+             ingredient: valid_attributes,
              session: valid_session
         expect(assigns(:ingredient)).to be_a(Ingredient)
         expect(assigns(:ingredient)).to be_persisted
       end
 
       it 'redirects to the created ingredient' do
+        sign_in @cook
+
         post :create,
-             params: { ingredient: valid_attributes },
+             ingredient: valid_attributes,
              session: valid_session
         expect(response).to redirect_to(Ingredient.last)
       end
@@ -123,15 +129,19 @@ RSpec.describe IngredientsController, type: :controller do
 
     context 'with invalid params' do
       it 'assigns a newly created but unsaved ingredient as @ingredient' do
+        sign_in @cook
+
         post :create,
-             params: { ingredient: invalid_attributes },
+             ingredient: invalid_attributes,
              session: valid_session
         expect(assigns(:ingredient)).to be_a_new(Ingredient)
       end
 
       it 're-renders the \'new\' template' do
+        sign_in @cook
+
         post :create,
-             params: { ingredient: invalid_attributes },
+             ingredient: invalid_attributes,
              session: valid_session
         expect(response).to render_template('new')
       end
@@ -145,12 +155,17 @@ RSpec.describe IngredientsController, type: :controller do
       end
 
       it 'updates the requested ingredient' do
+        sign_in @admin # only admin can edit
+
         ingredient = Ingredient.create! valid_attributes
+
         put :update,
-            params: { id: ingredient.to_param, ingredient: new_attributes },
+            id: ingredient.to_param,
+            ingredient: new_attributes,
             session: valid_session
         ingredient.reload
-        skip('Add assertions for updated state')
+
+        expect(ingredient.name).not_to eq(valid_attributes[:name])
       end
 
       it 'assigns the requested ingredient as @ingredient' do
