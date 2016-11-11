@@ -169,17 +169,21 @@ RSpec.describe IngredientsController, type: :controller do
       end
 
       it 'assigns the requested ingredient as @ingredient' do
+        sign_in @admin
         ingredient = Ingredient.create! valid_attributes
         put :update,
-            params: { id: ingredient.to_param, ingredient: valid_attributes },
+            id: ingredient.to_param,
+            ingredient: valid_attributes,
             session: valid_session
         expect(assigns(:ingredient)).to eq(ingredient)
       end
 
       it 'redirects to the ingredient' do
+        sign_in @admin
         ingredient = Ingredient.create! valid_attributes
         put :update,
-            params: { id: ingredient.to_param, ingredient: valid_attributes },
+            id: ingredient.to_param,
+            ingredient: valid_attributes,
             session: valid_session
         expect(response).to redirect_to(ingredient)
       end
@@ -187,17 +191,21 @@ RSpec.describe IngredientsController, type: :controller do
 
     context 'with invalid params' do
       it 'assigns the ingredient as @ingredient' do
+        sign_in @admin
         ingredient = Ingredient.create! valid_attributes
         put :update,
-            params: { id: ingredient.to_param, ingredient: invalid_attributes },
+            id: ingredient.to_param,
+            ingredient: invalid_attributes,
             session: valid_session
         expect(assigns(:ingredient)).to eq(ingredient)
       end
 
       it 're-renders the \'edit\' template' do
+        sign_in @admin
         ingredient = Ingredient.create! valid_attributes
         put :update,
-            params: { id: ingredient.to_param, ingredient: invalid_attributes },
+            id: ingredient.to_param,
+            ingredient: invalid_attributes,
             session: valid_session
         expect(response).to render_template('edit')
       end
