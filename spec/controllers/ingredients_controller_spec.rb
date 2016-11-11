@@ -35,11 +35,26 @@ RSpec.describe IngredientsController, type: :controller do
   # IngredientsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  before :each do
+    Ingredient.destroy_all
+
+    ["Alcaparra", "Pimenta", "Cominho", "Alho"].each do |name|
+      Ingredient.create! name: name, description: name
+    end
+  end
+
   describe 'GET #index' do
-    it 'assigns all ingredients as @ingredients' do
-      ingredient = Ingredient.create! valid_attributes
-      get :index, params: {}, session: valid_session
-      expect(assigns(:ingredients)).to eq([ingredient])
+    it 'searchs for ingredients' do
+      get :index, :search=>"alh", session: valid_session
+      expect(assigns(:ingredients).size).to eq(1)
+    end
+
+    it 'sort ingredients by name by default' do
+      ingredients = ["Alcaparra", "Pimenta"]
+      get :index, :search=>nil, session: valid_session
+
+      expect(assigns(:ingredients).first.name).to eq(ingredients.first)
+      expect(assigns(:ingredients).last.name).to eq(ingredients.last)
     end
   end
 
