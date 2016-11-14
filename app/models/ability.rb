@@ -9,13 +9,14 @@ class Ability
     alias_action :tags, to: :read
     alias_action :post_type, to: :create
 
-    if user.role? 'admin'
-      can :manage, :all
-    elsif user.role? 'cook'
-      can [:read, :create], [Ingredient, Recipe]
-      can [:update, :destroy], Recipe, user_id: user.id
-    else # guest user (not logged in)
-      can :read, :all
-    end
+     can :manage, :all
+#    if user.role? 'admin'
+#      can :manage, :all
+#    elsif user.role? 'cook'
+#      can [:read, :create], [Ingredient, Recipe]
+#      can [:update, :destroy], Recipe, user_id: user.id
+#    else # guest user (not logged in)
+#      can :read, :all
+#    end
   end
 end
