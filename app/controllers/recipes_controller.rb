@@ -3,6 +3,7 @@ class RecipesController < ApplicationController
   # Authentication and Authorization hacks
   # before_action :authenticate_user!
   load_and_authorize_resource
+  helper_method :sort_column, :sort_direction
 
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
@@ -40,6 +41,8 @@ class RecipesController < ApplicationController
 
   # GET /recipes/new
   def new
+    @ingredients = Ingredient.search(params[:search]).order(sort_column + ' ' +
+    sort_direction).paginate(per_page: 5, page: params[:page])
     @recipes_builder = @@recipes_builder
   end
 
@@ -102,6 +105,14 @@ class RecipesController < ApplicationController
       end
       format.json { head :no_content }
     end
+  end
+
+  def sort_column
+    Ingredient.column_names.include?(params[:sort]) ? params[:sort] : 'name'
+  end
+
+  def sort_direction
+    %w(asc desc).include?(params[:direction]) ? params[:direction] : 'asc'
   end
 
   private

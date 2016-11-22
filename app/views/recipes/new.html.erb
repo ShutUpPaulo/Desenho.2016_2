@@ -1,8 +1,8 @@
 <h1>New Recipe</h1>
 
-<div style="display: block; padding: 10px" id="recipe_div">
+<!-- <div style="display: block; padding: 10px" id="recipe_div">
   <%= @recipes_builder.recipe.recipe_type %>: Oi eu sou o goku!
-</div>
+</div> -->
 
 <%= form_for(@recipes_builder.recipe) do |f| %>
   <% if @recipes_builder.recipe.errors.any? %>
@@ -18,19 +18,26 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name, "Nome" %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
+    <%= f.label :description, "Descrição" %><br>
     <%= f.text_field :description %>
   </div>
+  <div class ="field">
+    <%=f.label :ingredients, "Ingredientes"%><br>
+    <%= form_tag ingredients_path, :method => 'get', :id => "ingredients_search" do %>
+      <div id="ingredients"><%= render 'ingredients_field' %></div>
+    <% end %>
+    <p id="notice"><%= notice %></p>
+  </div>
   <div class="field">
-    <%= f.label :instructions %><br>
+    <%= f.label :instructions, "Instruções" %><br>
     <%= f.text_field :instructions %>
   </div>
   <div class="field">
-    <%= f.label :tag_list, "Tags (separated by commas)" %><br>
+    <%= f.label :tag_list, "Tags (separadas por vírgula)" %><br>
     <%= f.text_field :tag_list %>
   </div>
   <div class="actions">
