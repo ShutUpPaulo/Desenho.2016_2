@@ -6,6 +6,8 @@ class RecipesController < ApplicationController
 
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
+  cattr_accessor :recipes_builder
+  @@recipes_builder = nil
   # GET /recipes
   # GET /recipes.json
   def index
@@ -23,6 +25,7 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
+    @recipe = Recipe.find_by(id: params[:id])
   end
 
   # GET /recipes/type
@@ -31,7 +34,6 @@ class RecipesController < ApplicationController
 
   # POST /recipes/type
   def post_type
-    @@recipes_builder = nil
     @@recipes_builder = choose_builder(params[:number])
     redirect_to '/recipes/new'
   end
@@ -58,7 +60,7 @@ class RecipesController < ApplicationController
     respond_to do |format|
       if @recipe.save
         format.html do
-          redirect_to @recipe, notice: 'Recipe was successfully created.'
+          redirect_to recipe_path(@recipe), notice: 'Recipe was successfully created.'
         end
         format.json { render :show, status: :created, location: @recipe }
         current_user.recipes << @recipe

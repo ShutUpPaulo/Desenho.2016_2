@@ -62,7 +62,15 @@ group :development do
   # Spring speeds up development by keeping your application running in the
   # background. Read more: https://github.com/rails/spring
   gem 'spring'
-
-  # Gem used to create tags on funcionalities
-  gem 'acts-as-taggable-on', '~> 4.0'
 end
+
+# Gem used to create tags on funcionalities
+gem 'acts-as-taggable-on', '~> 4.0'
+
+# gem for test coverage
+group :test do
+  gem "simplecov"
+  gem "codeclimate-test-reporter", "~> 1.0.0"
+end
+
+
