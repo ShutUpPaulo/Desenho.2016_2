@@ -21,25 +21,33 @@
     <%= f.label :name, "Nome" %><br>
     <%= f.text_field :name %>
   </div>
+
   <div class="field">
     <%= f.label :description, "Descrição" %><br>
     <%= f.text_field :description %>
   </div>
+
   <div class ="field">
-    <%=f.label :ingredients, "Ingredientes"%><br>
-    <%= form_tag ingredients_path, :method => 'get', :id => "ingredients_search" do %>
-      <div id="ingredients"><%= render 'ingredients_field' %></div>
+    <%= form_tag recipes_path, :method => 'get', :id => "ingredients_search" do %>
+    <%= label_tag :ingredients, "Ingredientes"%><br>
+      <p>
+        <%= text_field_tag :search, params[:search] %>
+        <%= submit_tag "Search", :name => nil %>
+      </p>
+      <div id="recipes"><%= render 'recipes' %></div>
     <% end %>
-    <p id="notice"><%= notice %></p>
   </div>
+
   <div class="field">
     <%= f.label :instructions, "Instruções" %><br>
     <%= f.text_field :instructions %>
   </div>
+
   <div class="field">
     <%= f.label :tag_list, "Tags (separadas por vírgula)" %><br>
     <%= f.text_field :tag_list %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

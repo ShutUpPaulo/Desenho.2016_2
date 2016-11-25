@@ -6,6 +6,7 @@ class RecipesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :set_ingredient, only: [:show, :edit, :update, :destroy]
 
   cattr_accessor :recipes_builder
   @@recipes_builder = nil
@@ -107,14 +108,6 @@ class RecipesController < ApplicationController
     end
   end
 
-  def sort_column
-    Ingredient.column_names.include?(params[:sort]) ? params[:sort] : 'name'
-  end
-
-  def sort_direction
-    %w(asc desc).include?(params[:direction]) ? params[:direction] : 'asc'
-  end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -141,5 +134,13 @@ class RecipesController < ApplicationController
     else
       DrinkBuilder.new
     end
+  end
+
+  def sort_column
+    Ingredient.column_names.include?(params[:sort]) ? params[:sort] : 'name'
+  end
+
+  def sort_direction
+    %w(asc desc).include?(params[:direction]) ? params[:direction] : 'asc'
   end
 end
