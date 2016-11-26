@@ -29,21 +29,19 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   def new
     @recipe = Recipe.new
-    @ingredients = Ingredient.search(params[:search]).order(sort_column + ' ' +
-    sort_direction).paginate(per_page: 5, page: params[:page])
+    @ingredients = Ingredient.all
+    # Ingredient.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(per_page: 5, page: params[:page])
   end
 
   # GET /recipes/1/edit
   def edit
+    @ingredients = Ingredient.all
   end
 
   # POST /recipes
   # POST /recipes.json
   def create
     @recipe = Recipe.new(recipe_params)
-
-    # FIXME: linking ingredients to recipes the wrong way
-    @recipe.ingredients << Ingredient.first unless Ingredient.all.empty?
 
     respond_to do |format|
       if @recipe.save
@@ -104,7 +102,8 @@ class RecipesController < ApplicationController
     params.require(:recipe).permit(:name,
                                    :description,
                                    :instructions,
-                                   :tag_list)
+                                   :tag_list,
+                                   ingredient_ids: [])
   end
 
   def sort_column
