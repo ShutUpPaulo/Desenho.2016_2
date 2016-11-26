@@ -1,56 +1,5 @@
 <h1>New Recipe</h1>
 
-<!-- <div style="display: block; padding: 10px" id="recipe_div">
-  <%= @recipes_builder.recipe.recipe_type %>: Oi eu sou o goku!
-</div> -->
-
-<%= form_for(@recipes_builder.recipe) do |f| %>
-  <% if @recipes_builder.recipe.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@recipes_builder.recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
-
-      <ul>
-      <% @recipes_builder.recipe.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name, "Nome" %><br>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :description, "Descrição" %><br>
-    <%= f.text_field :description %>
-  </div>
-
-  <div class ="field">
-    <%= form_tag recipes_path, :method => 'get', :id => "ingredients_search" do %>
-    <%= label_tag :ingredients, "Ingredientes"%><br>
-      <p>
-        <%= text_field_tag :search, params[:search] %>
-        <%= submit_tag "Search", :name => nil %>
-      </p>
-      <div id="recipes"><%= render 'recipes' %></div>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :instructions, "Instruções" %><br>
-    <%= f.text_field :instructions %>
-  </div>
-
-  <div class="field">
-    <%= f.label :tag_list, "Tags (separadas por vírgula)" %><br>
-    <%= f.text_field :tag_list %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<%= render 'form' %>
 
 <%= link_to 'Back', recipes_path %>
