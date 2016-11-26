@@ -19,6 +19,15 @@
 $(document).ready(function(){
   $('.modal').modal();
 
+  $(document).on("click", "#recipe_ingredients_table .pagination a", function() {
+    $.getScript(this.href);
+    return false;
+  });
+  // $("#recipe_ingredients_search input").keyup(function() {
+  //   $.get($("#recipe_ingredients_search").attr("action"), $("#recipe_ingredients_search").serialize(), null, "script");
+  //   return false;
+  // });
+
   $(document).on("click", "#ingredients .pagination a", function() {
     $.getScript(this.href);
     return false;

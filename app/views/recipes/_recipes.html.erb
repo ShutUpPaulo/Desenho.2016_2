@@ -1,0 +1,16 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+<table class="pretty">
+  <tr>
+    <th><%= sortable "name" %></th>
+  </tr>
+  <% for ingredient in @ingredients %>
+    <tr>
+      <p>
+        <input type="checkbox" class="filled-in" id=<%= "filled-in-box" + ingredient.id.to_s %> />
+        <label for=<%= "filled-in-box" + ingredient.id.to_s %>><%= ingredient.name %></label>
+      </p>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @ingredients %>

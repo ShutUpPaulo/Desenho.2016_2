@@ -3,11 +3,10 @@ class RecipesController < ApplicationController
   # Authentication and Authorization hacks
   # before_action :authenticate_user!
   load_and_authorize_resource
+  helper_method :sort_column, :sort_direction
 
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
-  cattr_accessor :recipes_builder
-  @@recipes_builder = nil
   # GET /recipes
   # GET /recipes.json
   def index
@@ -25,37 +24,24 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
-    @recipe = Recipe.find_by(id: params[:id])
-  end
-
-  # GET /recipes/type
-  def type
-  end
-
-  # POST /recipes/type
-  def post_type
-    @@recipes_builder = choose_builder(params[:number])
-    redirect_to '/recipes/new'
   end
 
   # GET /recipes/new
   def new
-    @recipes_builder = @@recipes_builder
+    @recipe = Recipe.new
+    @ingredients = Ingredient.all
+    # Ingredient.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(per_page: 5, page: params[:page])
   end
 
   # GET /recipes/1/edit
   def edit
+    @ingredients = Ingredient.all
   end
 
   # POST /recipes
   # POST /recipes.json
   def create
-    recipes_builder = @@recipes_builder
-    recipes_builder.build_recipe(recipe_params)
-    @recipe = recipes_builder.recipe
-
-    # FIXME: linking ingredients to recipes the wrong way
-    @recipe.ingredients << Ingredient.first unless Ingredient.all.empty?
+    @recipe = Recipe.new(recipe_params)
 
     respond_to do |format|
       if @recipe.save
@@ -116,19 +102,15 @@ class RecipesController < ApplicationController
     params.require(:recipe).permit(:name,
                                    :description,
                                    :instructions,
-                                   :tag_list)
+                                   :tag_list,
+                                   ingredient_ids: [])
   end
 
-  # Choose Builder
-  def choose_builder(type)
-    if type == '1'
-      MainPlateBuilder.new
-    elsif type == '2'
-      AccompanimentBuilder.new
-    elsif type == '3'
-      DessertBuilder.new
-    else
-      DrinkBuilder.new
-    end
+  def sort_column
+    Ingredient.column_names.include?(params[:sort]) ? params[:sort] : 'name'
+  end
+
+  def sort_direction
+    %w(asc desc).include?(params[:direction]) ? params[:direction] : 'asc'
   end
 end
