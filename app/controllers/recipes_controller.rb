@@ -3,8 +3,8 @@ class RecipesController < ApplicationController
   # Authentication and Authorization hacks
   # before_action :authenticate_user!
   load_and_authorize_resource
-  helper_method :sort_column, :sort_direction
 
+  helper_method :sort_column, :sort_direction
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
   # GET /recipes
