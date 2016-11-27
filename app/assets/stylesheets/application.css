@@ -23,6 +23,17 @@
   vertical-align: middle;
 }
 
+#main-img-wrapper {
+  margin: 2%;
+  text-align: center;
+  display: block;
+}
+
+#main-img {
+  display: inline-block;
+  width: 20%;
+}
+
 .modal {
   width: 25% !important;
 }
