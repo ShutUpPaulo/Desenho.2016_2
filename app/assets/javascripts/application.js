@@ -17,6 +17,8 @@
 //= require materialize.min
 
 $(document).ready(function(){
+  $('.modal').modal();
+
   $(document).on("click", "#ingredients .pagination a", function() {
     $.getScript(this.href);
     return false;
