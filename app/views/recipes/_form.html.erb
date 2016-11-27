@@ -20,9 +20,21 @@
     <%= f.text_field :description %>
   </div>
 
-  <div class="col-md-4 checkbox-list">
-    <%= f.collection_check_boxes :ingredient_ids, @ingredients, :id, :name %>
-  </div>
+  <table id="recipe_ingredients">
+  <thead>
+    <tr>
+      <th>Ingredient</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ingredients.each do |ingredient| %>
+      <tr>
+        <td><%= link_to(ingredient.name, ingredient) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  </table>
+
 
   <div class="field">
     <%= f.label :instructions %><br>

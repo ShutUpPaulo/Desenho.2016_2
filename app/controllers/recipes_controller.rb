@@ -30,7 +30,12 @@ class RecipesController < ApplicationController
   def new
     @recipe = Recipe.new
     @ingredients = Ingredient.all
-    # Ingredient.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(per_page: 5, page: params[:page])
+    # @ingredients = Ingredient.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(per_page: 5, page: params[:page])
+    respond_to do |format|
+      format.html
+      format.json { render json: IngredientsDatatable.new(view_context) }
+  end
+
   end
 
   # GET /recipes/1/edit
