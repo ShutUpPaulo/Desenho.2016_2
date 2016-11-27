@@ -1,4 +1,26 @@
 <div id="main-img-wrapper">
   <img id="main-img" src="/logo.png">
-  
 </div>
+
+<table id="recipe_search">
+<thead>
+  <tr>
+    <th>Receita</th>
+    <th>Ingredientes</th>
+  </tr>
+</thead>
+<tbody>
+  <% @recipes.each do |recipe| %>
+    <tr>
+      <td>
+        <%= link_to(recipe.name, recipe) %>
+      </td>
+      <td>
+        <% recipe.ingredients.each do |ingredient| %>
+          <p><%= ingredient.name %></p>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</tbody>
+</table>
