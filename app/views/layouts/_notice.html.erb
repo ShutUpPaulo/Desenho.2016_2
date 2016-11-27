@@ -1,0 +1,8 @@
+<%- unless notice.nil? %>
+  <script type="text/javascript">
+  function codeAddress() {
+    Materialize.toast('<%= notice %>', 4000)
+  }
+  window.onload = codeAddress;
+  </script>
+<% end -%>
