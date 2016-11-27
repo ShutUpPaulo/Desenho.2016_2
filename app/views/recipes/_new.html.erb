@@ -11,4 +11,11 @@
   <% end %>
 </table>
 
+<% for ingredient in @ingredients %>
+  <tr>
+    <input type="checkbox" class="filled-in" id= <%="filled-in-box" + ingredient.id.to_s%> />
+    <label for= <%= "filled-in-box" + ingredient.id.to_s %> ><%= ingredient.name %></label>
+  </tr>
+<% end %>
+
 <%= will_paginate @ingredients %>

@@ -27,11 +27,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @ingredients.each do |ingredient| %>
-      <tr>
-        <td><%= link_to(ingredient.name, ingredient) %></td>
-      </tr>
-    <% end %>
+    <tr>
+      <th><%= f.collection_check_boxes :ingredient_ids, @ingredients, :id, :name %></th>
+    </tr>
   </tbody>
   </table>
 
