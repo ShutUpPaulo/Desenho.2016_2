@@ -3,4 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 #
 jQuery ->
-  $('#recipe_ingredients').dataTable()
+  dataTable = $('#recipe_ingredients').dataTable()
+  $('#searchbox').keyup ->
+    dataTable.fnFilter @value
+    return
