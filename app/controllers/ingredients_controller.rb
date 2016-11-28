@@ -35,7 +35,7 @@ class IngredientsController < ApplicationController
     respond_to do |format|
       if @ingredient.save
         format.html do
-          redirect_to @ingredient, notice: 'Ingredient was successfully created'
+          redirect_to @ingredient, notice: 'Ingrediente criado com sucesso'
         end
         format.json { render :show, status: :created, location: @ingredient }
       else
@@ -55,7 +55,7 @@ class IngredientsController < ApplicationController
       if @ingredient.update(ingredient_params)
         format.html do
           redirect_to @ingredient,
-                      notice: 'Ingredient was successfully updated.'
+                      notice: 'Ingrediente atualizado com sucesso'
         end
         format.json { render :show, status: :ok, location: @ingredient }
       else
@@ -75,7 +75,7 @@ class IngredientsController < ApplicationController
     respond_to do |format|
       format.html do
         redirect_to ingredients_url,
-                    notice: 'Ingredient was successfully destroyed.'
+                    notice: 'Ingrediente excluído com sucesso'
       end
       format.json { head :no_content }
     end

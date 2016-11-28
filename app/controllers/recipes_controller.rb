@@ -3,7 +3,7 @@ class RecipesController < ApplicationController
   # Authentication and Authorization hacks
   # before_action :authenticate_user!
   load_and_authorize_resource
-  
+
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
   # GET /recipes
@@ -44,7 +44,7 @@ class RecipesController < ApplicationController
     respond_to do |format|
       if @recipe.save
         format.html do
-          redirect_to recipe_path(@recipe), notice: 'Recipe was successfully created.'
+          redirect_to recipe_path(@recipe), notice: 'Receita criada com sucesso'
         end
         format.json { render :show, status: :created, location: @recipe }
         current_user.recipes << @recipe
@@ -62,7 +62,7 @@ class RecipesController < ApplicationController
       if @recipe.update(recipe_params)
         format.html do
           redirect_to @recipe,
-                      notice: 'Recipe was successfully updated.'
+                      notice: 'Receita atualizada com sucesso'
         end
         format.json { render :show, status: :ok, location: @recipe }
       else
@@ -82,7 +82,7 @@ class RecipesController < ApplicationController
     respond_to do |format|
       format.html do
         redirect_to recipes_url,
-                    notice: 'Recipe was successfully destroyed.'
+                    notice: 'Receita excluída com sucesso'
       end
       format.json { head :no_content }
     end
