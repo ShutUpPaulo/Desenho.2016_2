@@ -47,6 +47,9 @@
   padding: auto 10px;
 }
 
+.page-footer.custom {
+  position:relative;
+}
 #copyright{
   text-align: center;
 }
