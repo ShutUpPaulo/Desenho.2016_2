@@ -22,8 +22,5 @@ Ingredient.create([{ name: 'acucar', description: '1' },
                    { name: 'arroz', description: '1asdfa' },
                    { name: 'feijao', description: '1ghrqegq' },
                    { name: 'salada', description: 'bvv1' },
-                   { name: 'porra', description: '1vvvv' },
-                   { name: 'oi', description: '1xxx' },
-                   { name: 'Goku', description: '1bbbb' },
                    { name: 'salsa', description: '1eeee' },
                    { name: 'merengue', description: '1tttt' }])

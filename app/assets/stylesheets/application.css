@@ -48,8 +48,12 @@
 }
 
 .page-footer.custom {
-  position:relative;
+  position: relative;
+  background-color: #ff8a80;
+  width: 100%;
+  bottom: 0;
 }
+
 #copyright{
   text-align: center;
 }
