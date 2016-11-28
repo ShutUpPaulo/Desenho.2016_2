@@ -5,12 +5,12 @@ RSpec.describe Ingredient, type: :model do
     Ingredient.destroy_all
 
     ["acucar", "tempero", "tudo de bom"].each do |name|
-      Ingredient.create! :name=>name
+      Ingredient.create! name: name, description: name
     end
   end
 
   it 'saves a valid ingredient' do
-    i = Ingredient.new
+    i = Ingredient.new name: 'test', description: 'test'
     expect(i.validate).to eq(true)
     expect(i.save).to eq(true)
   end

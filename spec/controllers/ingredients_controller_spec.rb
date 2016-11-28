@@ -35,33 +35,62 @@ RSpec.describe IngredientsController, type: :controller do
   # IngredientsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  before :all do
+    User.destroy_all
+    Role.destroy_all
+
+    @admin_role = Role.create! name: 'admin'
+    @cook_role = Role.create! name: 'cook'
+
+    @admin = create_sample_user 'admin', @admin_role
+    @cook = create_sample_user 'cook', @cook_role
+  end
+
+  before :each do
+    Ingredient.destroy_all
+
+    ["Alcaparra", "Pimenta", "Cominho", "Alho"].each do |name|
+      Ingredient.create! name: name, description: name
+    end
+  end
+
   describe 'GET #index' do
-    it 'assigns all ingredients as @ingredients' do
-      ingredient = Ingredient.create! valid_attributes
-      get :index, params: {}, session: valid_session
-      expect(assigns(:ingredients)).to eq([ingredient])
+    it 'searchs for ingredients' do
+      get :index, :search=>"alh", session: valid_session
+      expect(assigns(:ingredients).size).to eq(1)
+    end
+
+    it 'sort ingredients by name by default' do
+      ingredients = ["Alcaparra", "Pimenta"]
+      get :index, :search=>nil, session: valid_session
+
+      expect(assigns(:ingredients).first.name).to eq(ingredients.first)
+      expect(assigns(:ingredients).last.name).to eq(ingredients.last)
     end
   end
 
   describe 'GET #show' do
     it 'assigns the requested ingredient as @ingredient' do
       ingredient = Ingredient.create! valid_attributes
-      get :show, params: { id: ingredient.to_param }, session: valid_session
+      get :show, id: ingredient.to_param , session: valid_session
       expect(assigns(:ingredient)).to eq(ingredient)
     end
   end
 
   describe 'GET #new' do
     it 'assigns a new ingredient as @ingredient' do
-      get :new, params: {}, session: valid_session
+      sign_in @cook
+      get :new, session: valid_session
       expect(assigns(:ingredient)).to be_a_new(Ingredient)
     end
   end
 
   describe 'GET #edit' do
     it 'assigns the requested ingredient as @ingredient' do
+      # Only admin can edit
+      sign_in @admin
       ingredient = Ingredient.create! valid_attributes
-      get :edit, params: { id: ingredient.to_param }, session: valid_session
+      get :edit, id: ingredient.to_param, session: valid_session
       expect(assigns(:ingredient)).to eq(ingredient)
     end
   end
@@ -69,24 +98,30 @@ RSpec.describe IngredientsController, type: :controller do
   describe 'POST #create' do
     context 'with valid params' do
       it 'creates a new Ingredient' do
+        sign_in @cook
+
         expect do
           post :create,
-               params: { ingredient: valid_attributes },
+               ingredient: valid_attributes,
                session: valid_session
         end.to change(Ingredient, :count).by(1)
       end
 
       it 'assigns a newly created ingredient as @ingredient' do
+        sign_in @cook
+
         post :create,
-             params: { ingredient: valid_attributes },
+             ingredient: valid_attributes,
              session: valid_session
         expect(assigns(:ingredient)).to be_a(Ingredient)
         expect(assigns(:ingredient)).to be_persisted
       end
 
       it 'redirects to the created ingredient' do
+        sign_in @cook
+
         post :create,
-             params: { ingredient: valid_attributes },
+             ingredient: valid_attributes,
              session: valid_session
         expect(response).to redirect_to(Ingredient.last)
       end
@@ -94,15 +129,19 @@ RSpec.describe IngredientsController, type: :controller do
 
     context 'with invalid params' do
       it 'assigns a newly created but unsaved ingredient as @ingredient' do
+        sign_in @cook
+
         post :create,
-             params: { ingredient: invalid_attributes },
+             ingredient: invalid_attributes,
              session: valid_session
         expect(assigns(:ingredient)).to be_a_new(Ingredient)
       end
 
       it 're-renders the \'new\' template' do
+        sign_in @cook
+
         post :create,
-             params: { ingredient: invalid_attributes },
+             ingredient: invalid_attributes,
              session: valid_session
         expect(response).to render_template('new')
       end
@@ -116,26 +155,35 @@ RSpec.describe IngredientsController, type: :controller do
       end
 
       it 'updates the requested ingredient' do
+        sign_in @admin # only admin can edit
+
         ingredient = Ingredient.create! valid_attributes
+
         put :update,
-            params: { id: ingredient.to_param, ingredient: new_attributes },
+            id: ingredient.to_param,
+            ingredient: new_attributes,
             session: valid_session
         ingredient.reload
-        skip('Add assertions for updated state')
+
+        expect(ingredient.name).not_to eq(valid_attributes[:name])
       end
 
       it 'assigns the requested ingredient as @ingredient' do
+        sign_in @admin
         ingredient = Ingredient.create! valid_attributes
         put :update,
-            params: { id: ingredient.to_param, ingredient: valid_attributes },
+            id: ingredient.to_param,
+            ingredient: valid_attributes,
             session: valid_session
         expect(assigns(:ingredient)).to eq(ingredient)
       end
 
       it 'redirects to the ingredient' do
+        sign_in @admin
         ingredient = Ingredient.create! valid_attributes
         put :update,
-            params: { id: ingredient.to_param, ingredient: valid_attributes },
+            id: ingredient.to_param,
+            ingredient: valid_attributes,
             session: valid_session
         expect(response).to redirect_to(ingredient)
       end
@@ -143,17 +191,21 @@ RSpec.describe IngredientsController, type: :controller do
 
     context 'with invalid params' do
       it 'assigns the ingredient as @ingredient' do
+        sign_in @admin
         ingredient = Ingredient.create! valid_attributes
         put :update,
-            params: { id: ingredient.to_param, ingredient: invalid_attributes },
+            id: ingredient.to_param,
+            ingredient: invalid_attributes,
             session: valid_session
         expect(assigns(:ingredient)).to eq(ingredient)
       end
 
       it 're-renders the \'edit\' template' do
+        sign_in @admin
         ingredient = Ingredient.create! valid_attributes
         put :update,
-            params: { id: ingredient.to_param, ingredient: invalid_attributes },
+            id: ingredient.to_param,
+            ingredient: invalid_attributes,
             session: valid_session
         expect(response).to render_template('edit')
       end
@@ -162,20 +214,34 @@ RSpec.describe IngredientsController, type: :controller do
 
   describe 'DELETE #destroy' do
     it 'destroys the requested ingredient' do
+      sign_in @admin
       ingredient = Ingredient.create! valid_attributes
       expect do
         delete :destroy,
-               params: { id: ingredient.to_param },
+               id: ingredient.to_param,
                session: valid_session
       end.to change(Ingredient, :count).by(-1)
     end
 
     it 'redirects to the ingredients list' do
+      sign_in @admin
       ingredient = Ingredient.create! valid_attributes
       delete :destroy,
-             params: { id: ingredient.to_param },
+             id: ingredient.to_param,
              session: valid_session
       expect(response).to redirect_to(ingredients_url)
     end
   end
+
+  private
+
+    def create_sample_user name, role
+      user = User.create! first_name: "test#{name}",
+                          last_name: "test#{name}",
+                          email: "#{name}@user.com",
+                          password: "test#{name}",
+                          username: "test#{name}",
+                          role: role
+      user
+    end
 end
