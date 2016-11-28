@@ -4,7 +4,6 @@ class PagesController < ApplicationController
     @user = User.new
     @ingredients = Ingredient.all
     @recipes = Recipe.all
-
   end
 
   def about
