@@ -28,7 +28,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       clean_up_passwords resource
       set_minimum_password_length
       respond_to do |format|
-        flash.now[:notice] = 'Corrija os erros para proseguir'
+        flash.now[:notice] = 'Corrija os erros para prosseguir'
         format.html { render action: 'new' }
         format.xml { render xml: resource.errors, status: :unprocessable_entity }
       end
