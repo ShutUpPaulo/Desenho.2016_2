@@ -6,14 +6,11 @@ Rails.application.routes.draw do
   get 'tags', to: 'recipes#tags'
   resources :recipes
 
-  devise_for :users, controllers: {
-    # confirmations:      'users/confirmations',
-    # omniauth_callbacks: 'users/omniauth_callbacks',
-    passwords:          'users/passwods',
-    registrations:      'users/registrations',
-    sessions:           'users/sessions',
-    # unlocks:            'users/unlocks'
-  }
+  devise_for :users, controllers: { passwords: 'users/passwords',
+                                    registrations: 'users/registrations',
+                                    sessions: 'users/sessions'},
+                     path_names: { sign_up: '' }
+
   resources :users, only: :show
   resources :ingredients
 

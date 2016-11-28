@@ -1,6 +1,51 @@
-<h1>Hello <%= link_to current_user.username, edit_user_registration_path %></h1>
-<p>Find me in app/views/users/show.html.erb</p>
-<p>Name: <%= current_user.first_name %> <%= current_user.last_name %></p>
-<p>Email: <%= current_user.email %></p>
+<div class="container">
+  <div class="row">
+    <div class="col m10 offset-m1 s12">
+      <h2 class="center-align">Bem vindo, <%= current_user.username.humanize %></h2>
+      <!-- <h6 class="center-align"><em>Find me in app/views/users/show.html.erb</em></h6> -->
 
-<%= link_to 'sign out', destroy_user_session_path, method: 'delete' %>
+      <div class="row">
+        <div class="col s10 offfset-s1">
+          <p>Nome completo: <%= current_user.first_name.humanize %> <%= current_user.last_name.humanize %></p>
+          <p>E-mail: <%= current_user.email %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col m12">
+          <p class="center-align">
+            <%= link_to "Editar Perfil", edit_user_registration_path, class: "btn btn-large waves-effect waves-light" %>
+          </p>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <div class="col s10 offfset-s1">
+          <br>
+          <% if @recipes.empty? %>
+            <p><em>Nenhuma receita a ser mostrada.</em></p>
+          <% else %>
+            <h5>Minhas Receitas:</h5>
+          <% end %>
+          <% @recipes.each do |recipe| %>
+            <div class="col m6 s12">
+              <div class="card horizontal">
+                <div class="card-image">
+                  <img src="/logo.png">
+                </div>
+                <div class="card-stacked">
+                  <div class="card-content">
+                    <p><%= recipe.name.humanize %></p>
+                    <p style="color:gray"><%= recipe.description %></p>
+                  </div>
+                  <div class="card-action">
+                    <%= link_to 'Visualizar', recipe_path(recipe) %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

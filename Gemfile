@@ -43,6 +43,10 @@ gem 'devise'
 gem 'cancancan'
 gem 'will_paginate', '~> 3.1.5'
 
+gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+gem 'jquery-ui-rails'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger
   # console
@@ -72,5 +76,3 @@ group :test do
   gem "simplecov"
   gem "codeclimate-test-reporter", "~> 1.0.0"
 end
-
-
