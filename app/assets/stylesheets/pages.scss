@@ -1,0 +1,23 @@
+.dataTables_filter {
+     display: none;
+}
+
+.dataTables_length label {
+  display:none;
+}
+
+.dataTables_info label {
+  display: none;
+}
+
+table.dataTable thead th {
+  border-bottom: 0;
+}
+
+table.dataTable tfoot th {
+  border-top: 0;
+}
+
+.card.horizontal.green-color {
+  background-color: #caeebf
+}

@@ -43,7 +43,10 @@
     </tbody>
   </table>
 
-  <br>
+  <div class="row">
+    <%= link_to 'Novo Ingrediente', new_ingredient_path %>
+  </div>
+
   <div class="row">
     <div class="input-field col s12">
       <%= f.text_area :instructions, class: "materialize-textarea" %>

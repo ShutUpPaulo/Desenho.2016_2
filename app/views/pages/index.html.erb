@@ -1,4 +1,50 @@
 <div id="main-img-wrapper">
   <img id="main-img" src="/logo.png">
-  
+</div>
+
+<div class="row">
+  <div class="input-field col s6 offset-m3">
+    <label for="searchbox">Pesquisar por Ingredientes ou Receitas</label>
+    <input id="searchbox" type="text">
+  </div>
+
+  <table id="recipe_search">
+  <thead>
+    <tr>
+      <th></th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th></th>
+    </tr>
+  </tfoot>
+  <tbody>
+    <% @recipes.each do |recipe| %>
+      <tr>
+        <td>
+          <div class="col s10 offset-m1">
+            <div class="card horizontal green-color">
+              <div class="card-image">
+                <img id="main-img" src="/logo.png">
+                <span class="card-title"><%= link_to(recipe.name, recipe) %></span>
+              </div>
+              <div class="card-stacked">
+                <div class="card-content">
+                  <p><%= recipe.description %></p>
+                </div>
+                <div class="card-content">
+                  <h5>Ingredientes:</h5>
+                  <% recipe.ingredients.each do |ingredient| %>
+                    <%= ingredient.name %><br>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+  </table>
 </div>
