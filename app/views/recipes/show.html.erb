@@ -1,22 +1,42 @@
-<p>
-  <strong>Name:</strong>
-  <%= @recipe.name %>
-</p>
-
-<p>
-  <strong>description:</strong>
-  <%= @recipe.description %>
-</p>
-
-<p>
-  <strong>Instructions:</strong>
-  <%= @recipe.instructions %>
-</p>
-
-<p>
-  <strong>Tags:</strong>
-  <%= @recipe.tag_list %>
-</p>
-
-<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
-<%= link_to 'Back', recipes_path %>
+<div class="container">
+  <div class="row">
+    <div class="col m10 offset-m1 s12">
+      <h2 class="center-align"><%= @recipe.name.humanize %></h2>
+    </div>
+    <div class="row">
+      <div class="col m12">
+        <p>
+          <strong>Descrição:</strong>
+          <%= @recipe.description %>
+        </p>
+      </div>
+      <div class="col m12">
+        <strong>Ingredientes:</strong>
+        <ol>
+          <% @recipe.ingredients.each do |i| %>
+            <li><%= i.name %></li>
+          <% end %>
+        </ol>
+      </div>
+      <div class="col m12">
+        <p>
+          <strong>Instruções:</strong>
+          <%= @recipe.instructions %>
+        </p>
+      </div>
+      <div class="col m12">
+        <p>
+          <strong>Tags:</strong>
+          <%= @recipe.tag_list %>
+        </p>
+      </div>
+      <% if can? :edit, @recipe %>
+        <div class="col m12">
+          <p class="center-align">
+            <%= link_to 'Editar Receita', edit_recipe_path(@recipe), class: "btn btn-large waves-effect waves-light" %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
