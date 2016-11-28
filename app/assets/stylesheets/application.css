@@ -15,7 +15,7 @@
  *= require materialize
  *= require_self
  *= require_tree .
- */
+*/
 
 #header-logo {
   height: 50px;
@@ -45,6 +45,10 @@
 
 .form-control.sign-in {
   padding: auto 10px;
+}
+
+#copyright{
+  text-align: center;
 }
 
 .primary{
