@@ -10,11 +10,11 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_self
  *= require dataTables/jquery.dataTables
- *= require_tree .
  *= require material_icons
  *= require materialize
+ *= require_self
+ *= require_tree .
  */
 
 #header-logo {
@@ -57,4 +57,8 @@
 
 .terciary{
   background-color: #e0e0e0 !important;
+}
+
+#error_explanation > ul {
+  color: red;
 }

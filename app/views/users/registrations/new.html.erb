@@ -1,57 +1,64 @@
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6 col-md-4 col-md-offset-4">
-        <div class="center">
-          <div class="title">Venha fazer parte da nossa comunidade!</div>
-          <div class="account-wall">
-            <div class="resize">
-              <span class="glyphicon glyphicon-cutlery"></span>
+<div class="container">
+  <div class="row">
+    <div class="col m10 offset-m1 s12">
+      <h2 class="center-align">Cadastro</h2>
+      <h6 class="center-align"><em>Venha fazer parte da comunidade EasyCook!</em></h6>
+
+      <div class="row">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: 's12') do |f| %>
+          <%= devise_error_messages! %>
+
+          <div class="row">
+            <div class="input-field col m6 s12">
+              <%= f.text_field :first_name %>
+              <%= f.label :first_name, "Nome" %>
             </div>
-            <form class="form-signin">
-              <%= devise_error_messages! %>
-
-              <div class="field">
-                <%= f.label :first_name %><br />
-                <%= f.text_field :first_name, autofocus: true %>
-              </div>
-
-              <div class="field">
-                <%= f.label :last_name %><br />
-                <%= f.text_field :last_name %>
-              </div>
-
-              <div class="field">
-                <%= f.label :username %><br />
-                <%= f.text_field :username %>
-              </div>
-
-              <div class="field">
-                <%= f.label :email %><br />
-                <%= f.email_field :email %>
-              </div>
-
-              <div class="field">
-                <%= f.label :password %>
-                <% if @minimum_password_length %>
-                <em>(<%= @minimum_password_length %> characters minimum)</em>
-                <% end %><br />
-                <%= f.password_field :password, autocomplete: "off" %>
-              </div>
-
-              <div class="field">
-                <%= f.label :password_confirmation %><br />
-                <%= f.password_field :password_confirmation, autocomplete: "off" %>
-              </div>
-
-              <div class="actions">
-                <%= f.submit "Confirmar cadastro!", class: "btn-custom" %>
-              </div>
-              <!-- %= render "users/shared/links" %> -->
-            </form>
+            <div class="input-field col m6 s12">
+              <%= f.text_field :last_name %>
+              <%= f.label :last_name, "Sobrenome" %>
+            </div>
           </div>
-        </div>
+
+          <div class="row">
+            <div class="input-field col m6 s12">
+              <i class="material-icons prefix">account_circle</i>
+              <%= f.text_field :username %>
+              <%= f.label :username, "Nome de Usuário" %>
+            </div>
+            <div class="input-field col m6 s12">
+              <i class="material-icons prefix">email</i>
+              <%= f.email_field :email %>
+              <%= f.label :email, "E-mail" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col m6 s12">
+              <%= f.password_field :password, autocomplete: "off" %>
+              <%= f.label :password do %>
+                <% if @minimum_password_length %>
+                  Senha <em>(mínimo de <%= @minimum_password_length %> caracteres)</em>
+                <% else %>
+                  Senha
+                <% end %>
+              <% end %>
+            </div>
+            <div class="input-field col m6 s12">
+              <%= f.password_field :password_confirmation, autocomplete: "off" %>
+              <%= f.label :password_confirmation, "Confirmação de Senha" %><br />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col m12">
+              <p class="center-align">
+                <%= f.submit "Confirmar cadastro", class: "btn btn-large waves-effect waves-light" %>
+              </p>
+            </div>
+          </div>
+        </form>
+        <% end %>
       </div>
     </div>
   </div>
-<% end %>
+</div>

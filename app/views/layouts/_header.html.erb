@@ -16,11 +16,11 @@
       </ul>
       <ul class='right hide-on-med-and-down'>
         <% if user_signed_in? %>
-          <li><%= link_to 'Perfil', edit_user_registration_path %></li>
+          <li><%= link_to 'Perfil', user_path(current_user.id) %></li>
           <li><%= link_to 'Sair', destroy_user_session_path, method: :delete %></li>
         <% else %>
           <li><a href="#sign-in-modal">Entrar</a></li>
-          <li><a href="#sign-up-modal">Cadastre-se</a></li>
+          <li><%= link_to 'Cadastre-se', new_user_registration_path %></li>
         <% end %>
       </ul>
     </div>
@@ -28,53 +28,26 @@
 </div>
 
 <div id="sign-in-modal" class="modal">
-  <%= form_for(:user, url: session_path(:user)) do |f| %>
+  <%= form_for :user, url: session_path(:user) do |f| %>
     <div class="modal-content">
+      <h4 class="center-align">Login</h4>
       <div class="input-field col">
-        <%= f.email_field :email, class: 'validate', id: 'email' %>
-        <label for="email">E-mail</label>
+        <!-- <i class="material-icons prefix">email</i> -->
+        <%= f.text_field :email %>
+        <%= f.label :email, 'E-mail' %>
       </div>
       <div class="input-field col">
-        <%= f.password_field :password, class: 'validate', id: 'password', autocomplete: 'off' %>
-        <label for="password">Senha</label>
+        <!-- <i class="material-icons prefix">vpn_key</i> -->
+        <%= f.password_field :password, autocomplete: 'off' %>
+        <%= f.label :password, 'Senha' %>
+      </div>
+      <div class="input-field col">
+        <input type="checkbox" id="remember-me" value="remember-me" checked="checked" />
+        <label for="remember-me">Mantenha-me conectado</label>
       </div>
     </div>
     <div class="modal-footer">
       <%= f.submit 'Entrar', class: 'modal-action modal-close waves-effect waves-green btn-flat' %>
-    </div>
-  <% end %>
-</div>
-
-<div id="sign-up-modal" class="modal">
-  <%= form_for(:user, url: registration_path(:user)) do |f| %>
-    <div class="modal-content">
-      <div class="input-field col">
-        <%= f.text_field :first_name, class: 'validate', id: 'first_name' %>
-        <label for="first_name">Nome</label>
-      </div>
-      <div class="input-field col">
-        <%= f.text_field :last_name, class: 'validate', id: 'last_name' %>
-        <label for="last_name">Sobrenome</label>
-      </div>
-      <div class="input-field col">
-        <%= f.text_field :username, class: 'validate', id: 'username' %>
-        <label for="username">Usuário</label>
-      </div>
-      <div class="input-field col">
-        <%= f.email_field :email, class: 'validate', id: 'email' %>
-        <label for="email">E-mail</label>
-      </div>
-      <div class="input-field col">
-        <%= f.password_field :password, class: 'validate', id: 'password', autocomplete: 'off' %>
-        <label for="password">Senha</label>
-      </div>
-      <div class="input-field col">
-        <%= f.password_field :password_confirmation, class: 'validate', id: 'password_confirmation', autocomplete: 'off' %>
-        <label for="password_confirmation">Confirmação de senha</label>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <%= f.submit 'Cadastrar', class: 'modal-action modal-close waves-effect waves-green btn-flat' %>
     </div>
   <% end %>
 </div>

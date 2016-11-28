@@ -11,10 +11,10 @@
 // about supported directives.
 //
 //= require jquery
-//= require dataTables/jquery.dataTables
 //= require jquery_ujs
-//= require_tree .
 //= require materialize.min
+//= require dataTables/jquery.dataTables
+//= require_tree .
 
 $(document).ready(function(){
   $('.modal').modal();
@@ -23,19 +23,16 @@ $(document).ready(function(){
     $.getScript(this.href);
     return false;
   });
+
   $(document).keyup("#ingredients_search input", function() {
     $.get($("#ingredients_search").attr("action"), $("#ingredients_search").serialize(), null, "script");
     return false;
   });
 
-  $(document).ready(function() {
-    $('#recipe_ingredients').DataTable( {
-        columnDefs: [
-            {
-                targets: [ 0, 1, 2 ],
-                className: 'mdl-data-table__cell--non-numeric'
-            }
-        ]
-    } );
-} );
+  $('#recipe_ingredients').DataTable({
+    columnDefs: [{
+      targets: [ 0, 1, 2 ],
+      className: 'mdl-data-table__cell--non-numeric'
+    }]
+  });
 });
