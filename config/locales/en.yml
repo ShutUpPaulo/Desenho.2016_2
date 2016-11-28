@@ -23,4 +23,4 @@ en:
   hello: "Hello world"
   unauthorized:
     manage:
-      all: "Not authorized to %{action} %{subject}."
+      all: "Você não está autorizado a %{action} %{subject}."

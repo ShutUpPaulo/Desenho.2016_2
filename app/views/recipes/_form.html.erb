@@ -64,7 +64,11 @@
   <div class="row">
     <div class="col m12">
       <p class="center-align">
-        <%= f.submit "Atualizar", class: "btn btn-large waves-effect waves-light" %>
+        <% if request.env['PATH_INFO'] == "/recipes/new" %>
+          <%= f.submit "Criar Receita", class: "btn btn-large waves-effect waves-light" %>
+        <% else %>
+          <%= f.submit "Atualizar", class: "btn btn-large waves-effect waves-light" %>
+        <% end %>
       </p>
     </div>
   </div>
